@@ -18,12 +18,18 @@ exports.handler = async(event) => {
     if (!data.Items.length) {
         return {
             statusCode: 404,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify({ error: "Not found" })
         };
     }
 
     const response = {
         statusCode: 200,
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
         body: JSON.stringify(data.Items),
     };
     return response;
