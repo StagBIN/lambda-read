@@ -15,6 +15,13 @@ exports.handler = async(event) => {
 
     const data = await documentClient.query(params).promise();
 
+    if (!data.Items.length) {
+        return {
+            statusCode: 404,
+            body: JSON.stringify({ error: "Not found" })
+        };
+    }
+
     const response = {
         statusCode: 200,
         body: JSON.stringify(data.Items),
