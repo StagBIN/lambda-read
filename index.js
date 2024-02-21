@@ -5,12 +5,13 @@ const documentClient = new AWS.DynamoDB.DocumentClient();
 const tableName = "content";
 
 exports.handler = async(event) => {
+    let decoded_id = decodeURIComponent(event.pathParameters.id);
     const params = {
         TableName: tableName,
         KeyConditionExpression: 'id = :hashKey',
         //ProjectionExpression: "#id, #data, #url",
         ExpressionAttributeValues: {
-            ':hashKey': event.pathParameters.id,
+            ':hashKey': decoded_id,
         },
         // ExpressionAttributeNames: {
         //     "#data": "data",
